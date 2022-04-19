@@ -1,0 +1,30 @@
+{
+  "name": "lambda-layer-typescript",
+  "version": "1.0.0",
+  "description": "Template to deploy Lambda Layers with Serverless and Typescript",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npm run clean && npm run copy-package && npm run install-dependencies && npm run compile && npm run deploy",
+    "clean": "rimraf dist && mkdirp dist/nodejs",
+    "copy-package": "copyfiles -f ./package.json ./package-lock.json ./dist/nodejs",
+    "install-dependencies": "cd ./dist/nodejs && npm ci --only=prod && rimraf ./package.json ./package-lock.json",
+    "compile": "tsc && copyfiles -f ./package.json ./dist/nodejs/node_modules/@nebula/foundation",
+    "deploy": "npx sls deploy --stage dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zirkelc/lambda-layer-typescript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zirkelc/lambda-layer-typescript/issues"
+  },
+  "homepage": "https://github.com/zirkelc/lambda-layer-typescript#readme",
+  "devDependencies": {
+    "@tsconfig/node14": "^1.0.1",
+    "serverless": "^3.14.0",
+    "typescript": "^4.6.3"
+  }
+}
