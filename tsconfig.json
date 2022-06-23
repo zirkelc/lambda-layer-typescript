@@ -1,11 +1,11 @@
 {
-  "extends": "@tsconfig/node14/tsconfig.json", // https://github.com/tsconfig/bases#node-14-tsconfigjson
+  "extends": "@tsconfig/node14/tsconfig.json",
   "compilerOptions": {
     "removeComments": true,
     "sourceMap": true,
     // include src folder to use the same package.main entry point in development and production
-    "outDir": "dist/nodejs/node_modules/lambda-layer-typescript",
-    // "outDir": "dist",
+    // "outDir": "dist/nodejs/node_modules/lambda-layer-typescript",
+    "outDir": "dist",
     "declaration": true,
   },
   "include": [

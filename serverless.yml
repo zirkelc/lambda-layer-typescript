@@ -1,42 +1,22 @@
-service: lambda-layer-typescript
-variablesResolutionMode: 20210326
-frameworkVersion: '3'
-package:
-  individually: true
-
-# plugins:
-  # - serverless-webpack #https://github.com/serverless-heaven/serverless-webpack
-
-custom:
-  stage: ${env:STAGE, opt:stage, self:provider.stage, "dev"}
-
-#   webpack:
-#     webpackConfig: ./webpack.config.js
-#     includeModules:
-#       forceExclude:
-#         - aws-sdk
+service: base-layer
 
 provider:
   name: aws
   runtime: nodejs14.x
-  region: eu-west-1
+  region: us-east-1
   stage: dev
-  lambdaHashingVersion: 20201221
-  apiGateway:
-    minimumCompressionSize: 1024 # Enable gzip compression for responses > 1 KB
-    shouldStartNameWithService: true
 
 layers:
-  foundation:
+  base:
     path: dist
-    name: layer-${sls:stage}
+    name: base-layer-${sls:stage}
     compatibleRuntimes:
       - nodejs14.x
 
 resources:
   Outputs:
-    FoundationLambdaLayer:
+    BaseLambdaLayer:
       Value:
-        Ref: FoundationLambdaLayer
+        Ref: BaseLambdaLayer
       Export:
-        Name: nebula-foundation-dev-FoundationLambdaLayer #${self:service}-${sls:stage}-FoundationLambdaLayer
+        Name: ${self:service}-${sls:stage}-BaseLambdaLayer
